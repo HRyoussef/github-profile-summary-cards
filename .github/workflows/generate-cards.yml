@@ -1,0 +1,21 @@
+name: Generate Profile Summary Cards
+
+on:
+  workflow_dispatch:
+    inputs:
+      GITHUB_USERNAME:
+        description: 'GitHub username'
+        required: true
+        default: 'HRyoussef'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Generate cards
+        uses: vn7n24fzkq/github-profile-summary-cards@release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          USERNAME: ${{ github.event.inputs.GITHUB_USERNAME }}
